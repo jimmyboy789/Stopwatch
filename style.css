@@ -1,0 +1,137 @@
+/* =====================
+   BODY & BACKGROUND
+===================== */
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url("stop.jpg") center/cover no-repeat fixed;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+    z-index: -1;
+}
+
+/* =====================
+   CONTAINER
+===================== */
+.container {
+    background: rgba(20, 20, 20, 0.5);
+    backdrop-filter: blur(12px);
+    padding: 35px 40px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 0 0 rgba(0,0,0,0); /* no glow initially */
+    transition: box-shadow 0.4s ease, transform 0.2s ease;
+}
+
+/* Glow effect when running */
+.container.glow-start {
+    box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc50, 0 0 60px #00ffcc30;
+    transform: scale(1.02);
+}
+
+/* =====================
+   HEADING & DISPLAY
+===================== */
+.stopwatch h1 {
+    margin: 0 0 20px;
+    font-size: 42px;
+    letter-spacing: 3px;
+    color: #ffffffcc;
+}
+
+#display {
+    font-size: 50px;
+    font-weight: 700;
+    color: #00ffcc;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
+    user-select: none;
+    transition: transform 0.2s ease;
+}
+
+/* =====================
+   BUTTONS
+===================== */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.buttons button {
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+    background-size: 200% auto;
+}
+
+.buttons button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.45);
+    filter: brightness(1.15);
+    background-position: right center;
+}
+
+.buttons button:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.35);
+}
+
+/* BUTTON COLORS */
+#start { background: linear-gradient(135deg, #2ecc71, #27ae60); color: #fff; }
+#stop { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
+#reset { background: linear-gradient(135deg, #f1c40f, #f39c12); color: #222; }
+
+/* ACTIVE / INACTIVE STATES */
+.active {
+    opacity: 1;
+    pointer-events: auto;
+    animation: pulse 1.5s infinite;
+}
+
+.inactive {
+    opacity: 0.35;
+    pointer-events: none;
+    filter: grayscale(40%);
+    box-shadow: none;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 18px rgba(46,204,113,0.6); transform: scale(1); }
+    50% { box-shadow: 0 0 28px rgba(46,204,113,0.9); transform: scale(1.05); }
+    100% { box-shadow: 0 0 18px rgba(46,204,113,0.6); transform: scale(1); }
+}
+
+.active#stop { animation-name: pulseStop; }
+.active#reset { animation-name: pulseReset; }
+
+@keyframes pulseStop {
+    0% { box-shadow: 0 0 18px rgba(231,76,60,0.6); transform: scale(1); }
+    50% { box-shadow: 0 0 28px rgba(231,76,60,0.9); transform: scale(1.05); }
+    100% { box-shadow: 0 0 18px rgba(231,76,60,0.6); transform: scale(1); }
+}
+
+@keyframes pulseReset {
+    0% { box-shadow: 0 0 18px rgba(241,196,15,0.6); transform: scale(1); }
+    50% { box-shadow: 0 0 28px rgba(241,196,15,0.9); transform: scale(1.05); }
+    100% { box-shadow: 0 0 18px rgba(241,196,15,0.6); transform: scale(1); }
+}
